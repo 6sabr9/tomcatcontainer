@@ -18,7 +18,7 @@ pipeline {
 		stage('Staging Area Deployment'){
 			steps{
 				echo 'Deploying to staging area'
-				buid job: 'staging_job'
+				build job: 'KimWeb_Staging_Deployment_pipeline'
 			}
 			
 		}
@@ -28,7 +28,7 @@ pipeline {
 				timeout (time: 5, unit:'DAYS'){
 					input message: 'Approve production deployment job?'
 				}
-				build job: 'production_job'
+				build job: 'KimWeb_Production_Pipeline'
 			}
 			post {
 				success{
