@@ -1,8 +1,6 @@
 pipeline {
 	agent any
-	
 	stages{
-
 		stage('Package and Build Stage'){
 			steps {
 				bat 'mvn clean package'
@@ -14,15 +12,13 @@ pipeline {
 				}
 			}
 		}
-
 		stage('Staging Area Deployment'){
 			steps{
 				echo 'Deploying to staging area'
-				build job: 'KimWeb_Staging_Deployment_pipeline'
+				build job: 'KimWeb_Stagging_Pipeline'
 			}
 			
 		}
-
 		stage('Production Area Deployment'){
 			steps {
 				timeout (time: 5, unit:'DAYS'){
