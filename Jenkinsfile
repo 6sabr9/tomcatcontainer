@@ -10,7 +10,7 @@ pipeline {
 			post{
 				success{
 					echo 'job successfully packaged and build'
-					archiveArtificats artifacts: '**/*.war'
+					archiveArtifacts artifacts: '**/*.war'
 				}
 			}
 		}
