@@ -1,31 +1,29 @@
 pipeline{
 	agent any
-	stages{
-
-		stage("Building Stage..."){
-			steps{
-			sh 'mvn clean package'
+		stages{
+			stage("Building Stage..."){
+				steps{
+				sh 'mvn clean package'
+				}
+			post {
+				success{
+				echo 'Build is successful'
+				}
 			}
-		post {
-			success{
-			echo 'Build is successful'
+			stage ("Deploy to Tomcat Container..."){
+				steps{
+				sh 'sudo docker build . -t tomcatwebapp:{$evn.BUILD_ID}'
+				}
 			}
-		}
-
-		stage ("Deploy to Tomcat Container..."){
-			steps{
-			sh 'sudo docker build . -t tomcatwebapp:{$evn.BUILD_ID}'
+			stage ("Archieving Artifacts..."){
+				steps{
+					archiveArtifacts artifacts: '**/*.war'
+				}
 			}
-		}
-
-		stage ("Archieving Artifacts..."){
-			steps{
-				archiveArtifacts artifacts: '**/*.war'
-			}
-		}
-		post {
-			success{
-			echo "Job successfully achieved..."
+			post {
+				success{
+				echo "Job successfully achieved..."
+				}
 			}
 		}
 	}
