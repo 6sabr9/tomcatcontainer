@@ -6,14 +6,12 @@ pipeline{
 			steps{
 			sh 'mvn clean package'
 			}
-		}
-
-		post {
-			success{
-			echo 'Build is successful'
+			post {
+				success{
+				echo 'Build is successful'
+				}
 			}
 		}
-
 		stage ("Deploy to Tomcat Container..."){
 			steps{
 			sh 'sudo docker build . -t tomcatwebapp:{$evn.BUILD_ID}'
@@ -22,6 +20,11 @@ pipeline{
 		stage ("Archieving Artifacts..."){
 			steps{
 				archiveArtifacts artifacts: '**/*.war'
+			}
+			post {
+				success{
+				echo "Job successfully achieved..."
+				}
 			}
 		}
 	}
