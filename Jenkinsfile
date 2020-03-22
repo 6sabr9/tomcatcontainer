@@ -13,13 +13,14 @@ pipeline{
 			}
 		}
 		stage ("Deploy to Tomcat Container..."){
-			steps{
-			sh 'docker build . -t tomcatwebapp:${evn.BUILD_ID}'
+			steps{0
+			sh 
+			"docker build . -t tomcatwebapp:${evn.BUILD_ID}"
 			}
 		}
 		stage ("Archieving Artifacts..."){
 			steps{
-				archiveArtifacts artifacts: '**/*.war'
+				archiveArtifacts artifacts: "**/*.war"
 			}
 			post {
 				success{
