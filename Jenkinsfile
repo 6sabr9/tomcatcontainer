@@ -14,7 +14,7 @@ pipeline{
 		}
 		stage ("Deploy to Tomcat Container..."){
 			steps{
-			sh 'sudo docker build . -t tomcatwebapp:{$evn.BUILD_ID}'
+			sh 'docker build . -t tomcatwebapp:{$evn.BUILD_ID}'
 			}
 		}
 		stage ("Archieving Artifacts..."){
