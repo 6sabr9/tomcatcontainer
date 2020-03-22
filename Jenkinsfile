@@ -24,10 +24,5 @@ pipeline{
 				archiveArtifacts artifacts: '**/*.war'
 			}
 		}
-		post {
-			success{
-			echo "Job successfully achieved..."
-			}
-		}
 	}
 }
