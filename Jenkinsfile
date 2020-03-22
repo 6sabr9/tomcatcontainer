@@ -16,6 +16,11 @@ pipeline{
 			steps{
 					sh "docker build . -t tomcatwebapp:${evn.BUILD_ID}"
 			}
+			post{
+				success{
+					echo 'Successfully build and deploy to container'
+				}
+			}
 		}
 		stage ("Archieving Artifacts..."){
 			steps{
