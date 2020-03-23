@@ -12,16 +12,6 @@ pipeline{
 				}
 			}
 		}
-		stage ("Deploy to Tomcat Container..."){
-			steps{
-					sh "docker build . -t tomcatwebapp:${evn.BUILD_ID}"
-			}
-			post{
-				success{
-					echo 'Successfully build and deploy to container'
-				}
-			}
-		}
 		stage ("Archieving Artifacts..."){
 			steps{
 				archiveArtifacts artifacts: "**/*.war"
@@ -29,6 +19,16 @@ pipeline{
 			post {
 				success{
 				echo "Job successfully achieved..."
+				}
+			}
+		}
+		stage ("Deploy to Tomcat Container..."){
+			steps{
+					sh "docker build . -t tomcatwebapp:${evn.BUILD_ID}"
+			}
+			post{
+				success{
+					echo 'Successfully build and deploy to container'
 				}
 			}
 		}
