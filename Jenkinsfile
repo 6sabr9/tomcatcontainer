@@ -24,7 +24,7 @@ pipeline{
 		}
 		stage ("Deploy to Tomcat Container..."){
 			steps{
-					sh "sudo docker build . -t tomcatwebapp:${env.BUILD_ID}"
+					sh sudo "docker build . -t tomcatwebapp:${env.BUILD_ID}"
 			}
 			post{
 				success{
